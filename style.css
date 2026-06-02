@@ -1,7 +1,5 @@
 
 :root {
-  a, button, [onclick] {
-  cursor: pointer;
 }
   --blue:      #0061FF;
   --blue-d:    #0047CC;
