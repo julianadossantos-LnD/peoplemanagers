@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>People Manager Onboarding · StackAdapt</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body id="app-root">
+
+<!-- NAV -->
+<nav class="nav">
+  <a class="nav-logo" href="#" onclick="go('home')">
+    <span class="dot"></span>PMO StackAdapt
+  </a>
+  <div class="nav-links">
+    <a id="n-home" class="active" onclick="go('home')">Overview</a>
+    <a id="n-m1" onclick="go('m1')">Leadership</a>
+    <a id="n-m2" onclick="go('m2')">DEIB</a>
+    <a id="n-m3" onclick="go('m3')">Tools</a>
+    <a id="n-m4" onclick="go('m4')">Resources</a>
+    <a id="n-m5" onclick="go('m5')">Health & Safety</a>
+    <a id="n-m6" onclick="go('m6')">Lifecycle</a>
+    <a id="n-m7" onclick="go('m7')">Retention</a>
+  </div>
+  <div class="nav-right">
+    <button class="btn-signin" id="btn-signin" onclick="openModal()">Sign in</button>
+    <div class="nav-user" id="nav-user" style="display:none">
+      <img class="nav-avatar" src="" alt="">
+      <span class="nav-name"></span>
+      <button class="btn-signout" onclick="signOut()">Sign out</button>
+    </div>
+  </div>
+</nav>
+
+<!-- SIGNIN MODAL -->
+<div class="modal-bg" id="signin-modal" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <h2>Save your progress</h2>
+    <p>Sign in with your Google account to save your checklist progress across devices and sessions.</p>
+    <div id="google-btn-container"></div>
+    <button class="btn-google" onclick="openModal()">
+      <svg viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+      Continue with Google
+    </button>
+    <button class="modal-close" onclick="closeModal()">Continue without signing in</button>
+  </div>
+</div>
+
+<!-- HOME PAGE -->
+<div id="page-home">
+
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid-lines"></div>
+    <div class="hero-inner">
+      <div>
+        <div class="hero-badge fade-up"><span class="badge-dot"></span>People Manager Track · 7 Modules</div>
+        <h1 class="fade-up fade-up-d1">Lead with<br><em>clarity</em> and<br>confidence.</h1>
+        <p class="hero-sub fade-up fade-up-d2">Everything you need to show up as the leader your team deserves — built for StackAdapt's culture, tools, and pace.</p>
+        <div class="hero-actions fade-up fade-up-d3">
+          <button class="btn-primary" onclick="go('m1')">Begin Module 1 →</button>
+          <button class="btn-ghost" onclick="document.getElementById('tracks').scrollIntoView({behavior:'smooth'})">View all modules ↓</button>
+        </div>
+        <div class="hero-stats fade-up">
+          <div class="hero-stat"><div class="num">7</div><div class="lbl">Modules across<br>3 tracks</div></div>
+          <div class="hero-stat"><div class="num">94%</div><div class="lbl">Of employees stay when<br>growth is invested in</div></div>
+          <div class="hero-stat"><div class="num">1×</div><div class="lbl">Place for everything<br>you need as a new PM</div></div>
+        </div>
+      </div>
+      <div class="hero-right fade-up fade-up-d2">
+        <div class="hero-module-preview" onclick="go('m1')"><span class="hmp-num">01</span><div class="hmp-bar t1"></div><span class="hmp-title">Leadership at StackAdapt</span><span class="hmp-arrow">→</span></div>
+        <div class="hero-module-preview" onclick="go('m2')"><span class="hmp-num">02</span><div class="hmp-bar t1"></div><span class="hmp-title">DEIB Foundations</span><span class="hmp-arrow">→</span></div>
+        <div class="hero-module-preview" onclick="go('m3')"><span class="hmp-num">03</span><div class="hmp-bar t2"></div><span class="hmp-title">Intro to Tools</span><span class="hmp-arrow">→</span></div>
+        <div class="hero-module-preview" onclick="go('m4')"><span class="hmp-num">04</span><div class="hmp-bar t2"></div><span class="hmp-title">Intro to Resources</span><span class="hmp-arrow">→</span></div>
+        <div class="hero-module-preview" onclick="go('m5')"><span class="hmp-num">05</span><div class="hmp-bar t2"></div><span class="hmp-title">Health & Safety</span><span class="hmp-arrow">→</span></div>
+        <div class="hero-module-preview" onclick="go('m6')"><span class="hmp-num">06</span><div class="hmp-bar t3"></div><span class="hmp-title">Employee Experience & Lifecycle</span><span class="hmp-arrow">→</span></div>
+        <div class="hero-module-preview" onclick="go('m7')"><span class="hmp-num">07</span><div class="hmp-bar t3"></div><span class="hmp-title">Driving Retention & Growth</span><span class="hmp-arrow">→</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div id="tracks" class="tracks-section">
+    <div class="section-wrap">
+      <div class="tracks-header">
+        <div class="section-eyebrow">Program curriculum</div>
+        <h2 class="section-h2">Seven modules.<br><em>Three tracks.</em></h2>
+        <p class="section-lead">Each track builds on the last — from culture and compliance foundations, to systems and tools, to leading your team through every stage of the employee journey.</p>
+      </div>
+
+      <div class="tracks-grid">
+        <!-- Track 1 -->
+        <div class="track-block">
+          <div class="track-label-row">
+            <span class="tnum t1">Track 01</span>
+            <span class="tname">Foundations</span>
+            <span class="trule"></span>
+            <span class="tcnt">2 modules</span>
+          </div>
+          <div class="modules-row">
+            <a class="mod-card" onclick="go('m1')">
+              <div class="mod-card-accent t1"></div>
+              <div class="mod-card-num t1">Module 01</div>
+              <div class="mod-card-title">Leadership at StackAdapt</div>
+              <div class="mod-card-desc">Culture, values, the three Leadership Principles, IC vs PM tracks, and managing yourself, your work, and your team.</div>
+              <div class="mod-card-footer">
+                <div class="mod-tags"><span class="mod-tag t1">Culture</span><span class="mod-tag t1">Values</span></div>
+                <div class="mod-arrow t1">→</div>
+              </div>
+            </a>
+            <a class="mod-card" onclick="go('m2')">
+              <div class="mod-card-accent t1"></div>
+              <div class="mod-card-num t1">Module 02</div>
+              <div class="mod-card-title">DEIB Foundations</div>
+              <div class="mod-card-desc">Diversity commitments, hiring for inclusion, the Disclo accommodation process, and equitable leadership in practice.</div>
+              <div class="mod-card-footer">
+                <div class="mod-tags"><span class="mod-tag t1">DEIB</span><span class="mod-tag t1">Inclusion</span></div>
+                <div class="mod-arrow t1">→</div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Track 2 -->
+        <div class="track-block">
+          <div class="track-label-row">
+            <span class="tnum t2">Track 02</span>
+            <span class="tname">Systems & Tools</span>
+            <span class="trule"></span>
+            <span class="tcnt">3 modules</span>
+          </div>
+          <div class="modules-row">
+            <a class="mod-card" onclick="go('m3')">
+              <div class="mod-card-accent t2"></div>
+              <div class="mod-card-num t2">Module 03</div>
+              <div class="mod-card-title">Intro to Tools</div>
+              <div class="mod-card-desc">UKG, ADP, Freshservice, Navan, ZipHQ, and responsible use of AI tools like Ivy and Gemini.</div>
+              <div class="mod-card-footer">
+                <div class="mod-tags"><span class="mod-tag t2">UKG</span><span class="mod-tag t2">AI Tools</span></div>
+                <div class="mod-arrow t2">→</div>
+              </div>
+            </a>
+            <a class="mod-card" onclick="go('m4')">
+              <div class="mod-card-accent t2"></div>
+              <div class="mod-card-num t2">Module 04</div>
+              <div class="mod-card-title">Intro to Resources</div>
+              <div class="mod-card-desc">Key Guru pages, PBP partnership, 6 core policy areas, and employee wellbeing resources every PM needs to know.</div>
+              <div class="mod-card-footer">
+                <div class="mod-tags"><span class="mod-tag t2">Guru</span><span class="mod-tag t2">PBP</span></div>
+                <div class="mod-arrow t2">→</div>
+              </div>
+            </a>
+            <a class="mod-card" onclick="go('m5')">
+              <div class="mod-card-accent t2"></div>
+              <div class="mod-card-num t2">Module 05</div>
+              <div class="mod-card-title">Health & Safety</div>
+              <div class="mod-card-desc">Manager responsibilities, remote incident types, the reporting process, and when to escalate to your PBP.</div>
+              <div class="mod-card-footer">
+                <div class="mod-tags"><span class="mod-tag t2">Wellbeing</span><span class="mod-tag t2">Safety</span></div>
+                <div class="mod-arrow t2">→</div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Track 3 -->
+        <div class="track-block">
+          <div class="track-label-row">
+            <span class="tnum t3">Track 03</span>
+            <span class="tname">Team Leadership</span>
+            <span class="trule"></span>
+            <span class="tcnt">2 modules</span>
+          </div>
+          <div class="modules-row">
+            <a class="mod-card" onclick="go('m6')">
+              <div class="mod-card-accent t3"></div>
+              <div class="mod-card-num t3">Module 06</div>
+              <div class="mod-card-title">Employee Experience & Lifecycle</div>
+              <div class="mod-card-desc">Hiring, onboarding, 30/60/90 plans, leave types, flexible work models, development conversations, and offboarding.</div>
+              <div class="mod-card-footer">
+                <div class="mod-tags"><span class="mod-tag t3">Onboarding</span><span class="mod-tag t3">Lifecycle</span></div>
+                <div class="mod-arrow t3">→</div>
+              </div>
+            </a>
+            <a class="mod-card" onclick="go('m7')">
+              <div class="mod-card-accent t3"></div>
+              <div class="mod-card-num t3">Module 07</div>
+              <div class="mod-card-title">Driving Retention & Growth</div>
+              <div class="mod-card-desc">IOs, IDPs, peer mentorship, feedback practices, retaining top talent, and StackAdapt's full L&D resource suite.</div>
+              <div class="mod-card-footer">
+                <div class="mod-tags"><span class="mod-tag t3">Retention</span><span class="mod-tag t3">Growth</span></div>
+                <div class="mod-arrow t3">→</div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUICK REF -->
+  <div class="quick-ref-section">
+    <div class="section-wrap">
+      <div class="quick-ref-inner">
+        <div class="qr-top">
+          <div>
+            <div class="qr-eyebrow">Quick Reference</div>
+            <div class="qr-h">Checklists at a glance</div>
+          </div>
+        </div>
+        <div class="qr-grid">
+          <div class="qr-col">
+            <h4 class="c1">New hire onboarding</h4>
+            <ul>
+              <li>Add to all team meetings & Slack channels</li>
+              <li>Submit Freshservice IT access ticket</li>
+              <li>Add to shared drives and folders</li>
+              <li>Create 30/60/90 day plan</li>
+              <li>Share Personal/Professional Blueprint</li>
+              <li>Schedule regular 1:1 check-ins</li>
+              <li>Encourage coffee chats across StackAdapt</li>
+            </ul>
+          </div>
+          <div class="qr-col">
+            <h4 class="c2">Accommodation request</h4>
+            <ul>
+              <li>Send a warm follow-up Slack message</li>
+              <li>Share Disclo link and instructions</li>
+              <li>Introduce employee to their PBP</li>
+              <li>Document: date, time, what was discussed</li>
+              <li>Do NOT ignore, dismiss, or discourage</li>
+            </ul>
+          </div>
+          <div class="qr-col">
+            <h4 class="c3">Before terminating</h4>
+            <ul>
+              <li>Direct conversation about concerns?</li>
+              <li>Feedback and coaching provided?</li>
+              <li>Detailed documentation maintained?</li>
+              <li>Verbal warnings given?</li>
+              <li>Reignite Plan implemented if applicable?</li>
+              <li>Employee NOT on job-protected leave?</li>
+              <li>Partner with PBP throughout</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="section-wrap" style="padding-bottom: 2rem;">
+    <div class="cta-band">
+      <div class="section-eyebrow" style="justify-content:center">Ready to start?</div>
+      <h2>Your leadership journey begins now.</h2>
+      <p>Jump into Module 1 and build the foundations that define great people managers at StackAdapt.</p>
+      <button class="btn-primary" onclick="go('m1')">Start with Module 1 →</button>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo"><span class="dot"></span>PMO StackAdapt</div>
+    <div>People Experience Team · People Manager Onboarding Program</div>
+  </footer>
+</div>
+
+<!-- MODULE PAGES (1-7) -->
+<div id="page-m1" style="display:none" class="mod-page">
+  <div class="mod-page-hero t1">
+    <div class="mph-inner">
+      <div>
+        <button class="mph-back" onclick="go('home')">← All modules</button>
+        <div class="mph-eyebrow t1">Module 01 · Track 1: Foundations</div>
+        <h1 class="mph-h1">Leadership at StackAdapt</h1>
+        <p class="mph-lead">Culture, values, the three Leadership Principles, IC vs PM tracks, and managing yourself, your work, and your team with intention.</p>
+      </div>
+      <div class="mph-sidebar" id="sidebar-m1">
+        <div class="mph-sidebar-label">In this module</div>
+        <nav class="mph-sidebar-nav" id="snav-m1"></nav>
+        <div class="progress-bar-wrap">
+          <div class="pb-label">Progress <span id="progress-label-m1">0%</span></div>
+          <div class="pb-track"><div class="pb-fill" id="progress-m1" style="width:0%"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mod-page-body">
+    <div class="mod-page-content" id="content-m1">
+      <div class="content-block" id="m1-s0">
+        <h2 class="cb-h2"><span class="cb-num t1">01</span> Our Culture</h2>
+        <p class="cb-p">At StackAdapt, <strong>company culture is built through action</strong> — not through posters or policies. Every person at every level shapes the culture around them. As a fully remote and global company, maintaining culture requires intentional daily effort across digital platforms.</p>
+        <div class="callout t1"><strong>Observing your team:</strong> Be an impartial observer. Watch for emotions — what excites or frustrates your team? Notice what isn't there — topics unraised, channels underutilized, conversations that never happen.</div>
+        <p class="cb-p">StackAdapt uses <strong>CultureAmp</strong> twice per year (Q1 and Q3) to measure engagement and surface team-level insights for managers to act on.</p>
+      </div>
+
+      <div class="content-block" id="m1-s1">
+        <h2 class="cb-h2"><span class="cb-num t1">02</span> The Three Leadership Principles</h2>
+        <p class="cb-p">In addition to company values, People Managers are held to three leadership principles — non-negotiable for those in management roles.</p>
+        <div class="info-grid">
+          <div class="info-card"><h4 class="t1">All In</h4><p>Show up with focus, resilience, and drive to achieve success regardless of obstacles.</p></div>
+          <div class="info-card"><h4 class="t1">Force Multiplier</h4><p>Maximize resources, adapt to change, empower teams to achieve more. Develop, attract, and retain exceptional talent.</p></div>
+          <div class="info-card"><h4 class="t1">Champion Our Culture</h4><p>Embody integrity, foster trust, create an environment where everyone feels valued and empowered.</p></div>
+        </div>
+      </div>
+
+      <div class="content-block" id="m1-s2">
+        <h2 class="cb-h2"><span class="cb-num t1">03</span> IC vs. People Manager Tracks</h2>
+        <div class="info-grid">
+          <div class="info-card"><h4 class="t1">Individual Contributor (IC)</h4><p>Closest to the work. Responsible for delivering high-quality output and keeping StackAdapt running.</p></div>
+          <div class="info-card"><h4 class="t1">People Manager (PM)</h4><p>Stewards of the organization. Developing people is your primary craft — not just managing tasks.</p></div>
+        </div>
+        <p class="cb-p" style="margin-top:.75rem;">Both are assessed on Skills & Knowledge, Delivery, Quality, Care, and Adaptability — but scope and responsibility differ significantly.</p>
+      </div>
+
+      <div class="content-block" id="m1-s3">
+        <h2 class="cb-h2"><span class="cb-num t1">04</span> Three Areas of Focus</h2>
+        <div class="info-grid">
+          <div class="info-card"><h4 class="t1">Managing Yourself</h4><p>Cultivate self-awareness, embrace continuous reflection, identify strengths and growth areas.</p></div>
+          <div class="info-card"><h4 class="t1">Managing the Work</h4><p>Create space for great ideas, align team efforts with goals, unblock the team, drive results.</p></div>
+          <div class="info-card"><h4 class="t1">Managing the Team</h4><p>Build strong relationships, leverage your manager network, practice the Leadership Principles intentionally.</p></div>
+        </div>
+      </div>
+
+      <div class="content-block" id="m1-s4">
+        <h2 class="cb-h2"><span class="cb-num t1">05</span> Module Checklist</h2>
+        <div class="checklist-card" data-checklist="m1">
+          <h3>Leadership foundations</h3>
+          <div class="check-item"><div class="chk"></div><span>I understand and can articulate StackAdapt's three Leadership Principles</span></div>
+          <div class="check-item"><div class="chk"></div><span>I understand the difference between the IC and PM performance tracks</span></div>
+          <div class="check-item"><div class="chk"></div><span>I've reflected on managing myself, my work, and my team</span></div>
+          <div class="check-item"><div class="chk"></div><span>I know when StackAdapt's CultureAmp surveys run and how to use results</span></div>
+          <div class="check-item"><div class="chk"></div><span>I can name behaviors that contribute to a positive remote team culture</span></div>
+        </div>
+      </div>
+
+      <div class="mod-nav-row">
+        <button class="btn-back-mod" onclick="go('home')">← Overview</button>
+        <button class="btn-next-mod t1" onclick="go('m2')">DEIB Foundations →</button>
+      </div>
+    </div>
+    <div>
+      <div class="mph-sidebar" style="position:sticky;top:80px;">
+        <div class="mph-sidebar-label">In this module</div>
+        <nav class="mph-sidebar-nav">
+          <a href="#m1-s0"><span class="snav-dot" style="background:var(--blue)"></span>Our Culture</a>
+          <a href="#m1-s1"><span class="snav-dot" style="background:var(--blue)"></span>Leadership Principles</a>
+          <a href="#m1-s2"><span class="snav-dot" style="background:var(--blue)"></span>IC vs PM Tracks</a>
+          <a href="#m1-s3"><span class="snav-dot" style="background:var(--blue)"></span>Three Areas of Focus</a>
+          <a href="#m1-s4"><span class="snav-dot" style="background:var(--blue)"></span>Module Checklist</a>
+        </nav>
+        <div class="progress-bar-wrap">
+          <div class="pb-label">Progress <span id="progress-label-m1b">—</span></div>
+          <div class="pb-track"><div class="pb-fill" id="progress-m1b" style="width:0%"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer><div class="footer-logo"><span class="dot"></span>PMO StackAdapt</div><div>People Experience Team</div></footer>
+</div>
+
+<!-- MODULE 2: DEIB -->
+<div id="page-m2" style="display:none" class="mod-page">
+  <div class="mod-page-hero t1"><div class="mph-inner"><div>
+    <button class="mph-back" onclick="go('home')">← All modules</button>
+    <div class="mph-eyebrow t1">Module 02 · Track 1: Foundations</div>
+    <h1 class="mph-h1">DEIB Foundations</h1>
+    <p class="mph-lead">StackAdapt's diversity commitments, hiring for inclusion, the Disclo accommodation process, and equitable leadership in practice.</p>
+  </div><div class="mph-sidebar">
+    <div class="mph-sidebar-label">In this module</div>
+    <nav class="mph-sidebar-nav"><a href="#m2-s0"><span class="snav-dot" style="background:var(--blue)"></span>DEIB Commitment</a><a href="#m2-s1"><span class="snav-dot" style="background:var(--blue)"></span>Accommodations</a><a href="#m2-s2"><span class="snav-dot" style="background:var(--blue)"></span>Equitable Leadership</a><a href="#m2-s3"><span class="snav-dot" style="background:var(--blue)"></span>Checklist</a></nav>
+    <div class="progress-bar-wrap"><div class="pb-label">Progress <span id="progress-label-m2">0%</span></div><div class="pb-track"><div class="pb-fill" id="progress-m2" style="width:0%"></div></div></div>
+  </div></div></div>
+  <div class="mod-page-body"><div class="mod-page-content">
+    <div class="content-block" id="m2-s0">
+      <h2 class="cb-h2"><span class="cb-num t1">01</span> StackAdapt's DEIB Commitment</h2>
+      <p class="cb-p">Measured annually through <strong>Diversio</strong> surveys. Current goals: increase female + non-binary representation by <strong>3%</strong>, BIPOC representation at all levels by <strong>2%</strong>, increase allyship and psychological safety, and involve <strong>#superpowers-at-stack</strong> in decision-making.</p>
+    </div>
+    <div class="content-block" id="m2-s1">
+      <h2 class="cb-h2"><span class="cb-num t1">02</span> Accommodations</h2>
+      <div class="callout warn"><strong>Accommodations are a legal requirement — not optional.</strong> StackAdapt uses <strong>Disclo</strong> (via Okta) to manage health disclosures and accommodation requests.</div>
+      <p class="cb-p">When an accommodation is disclosed, you must:</p>
+      <ul class="cb-ul"><li>Send a warm follow-up Slack message thanking the employee</li><li>Provide the Disclo link and accommodation page instructions</li><li>Introduce the employee to their <strong>People Business Partner (PBP)</strong></li><li>Document: date, time, and what was discussed</li></ul>
+      <div class="callout t1"><strong>Do NOT:</strong> ignore, dismiss, fail to document, or discourage employees from contacting their PBP.</div>
+    </div>
+    <div class="content-block" id="m2-s2">
+      <h2 class="cb-h2"><span class="cb-num t1">03</span> Being an Equitable Leader</h2>
+      <p class="cb-p">Inclusive leadership addresses two fundamental human needs: <strong>belonging</strong> and <strong>feeling valued</strong>.</p>
+      <div class="info-grid">
+        <div class="info-card"><h4 class="t1">Belonging</h4><p>Create space where people feel genuinely included. Foster psychological safety every day.</p></div>
+        <div class="info-card"><h4 class="t1">Feeling Valued</h4><p>Recognize that different people need different support. Equal opportunity is the floor, not the ceiling.</p></div>
+        <div class="info-card"><h4 class="t1">Authenticity</h4><p>Build an environment where people can show up as their full selves every single day.</p></div>
+      </div>
+    </div>
+    <div class="content-block" id="m2-s3">
+      <h2 class="cb-h2"><span class="cb-num t1">04</span> Module Checklist</h2>
+      <div class="checklist-card" data-checklist="m2">
+        <h3>DEIB foundations</h3>
+        <div class="check-item"><div class="chk"></div><span>I know how to access Disclo via Okta</span></div>
+        <div class="check-item"><div class="chk"></div><span>I know the 4 steps when an accommodation is disclosed</span></div>
+        <div class="check-item"><div class="chk"></div><span>I understand accommodations are a legal requirement</span></div>
+        <div class="check-item"><div class="chk"></div><span>I can name my team's PBP and how to reach them</span></div>
+        <div class="check-item"><div class="chk"></div><span>I know where to find StackAdapt's current DEIB goals</span></div>
+      </div>
+    </div>
+    <div class="mod-nav-row"><button class="btn-back-mod" onclick="go('m1')">← Leadership</button><button class="btn-next-mod t2" onclick="go('m3')">Intro to Tools →</button></div>
+  </div><div></div></div>
+  <footer><div class="footer-logo"><span class="dot"></span>PMO StackAdapt</div><div>People Experience Team</div></footer>
+</div>
+
+<!-- MODULE 3: TOOLS -->
+<div id="page-m3" style="display:none" class="mod-page">
+  <div class="mod-page-hero t2"><div class="mph-inner"><div>
+    <button class="mph-back" onclick="go('home')">← All modules</button>
+    <div class="mph-eyebrow t2">Module 03 · Track 2: Systems & Tools</div>
+    <h1 class="mph-h1">Intro to Tools</h1>
+    <p class="mph-lead">The platforms and tools you'll use day-to-day: UKG, ADP, Freshservice, Navan, ZipHQ, and responsible AI use.</p>
+  </div><div class="mph-sidebar">
+    <div class="mph-sidebar-label">In this module</div>
+    <nav class="mph-sidebar-nav"><a href="#m3-s0"><span class="snav-dot" style="background:var(--green)"></span>UKG & ADP</a><a href="#m3-s1"><span class="snav-dot" style="background:var(--green)"></span>Freshservice & Navan</a><a href="#m3-s2"><span class="snav-dot" style="background:var(--green)"></span>ZipHQ & AI Tools</a><a href="#m3-s3"><span class="snav-dot" style="background:var(--green)"></span>Checklist</a></nav>
+    <div class="progress-bar-wrap"><div class="pb-label">Progress <span id="progress-label-m3">0%</span></div><div class="pb-track"><div class="pb-fill" id="progress-m3" style="width:0%;background:var(--green)"></div></div></div>
+  </div></div></div>
+  <div class="mod-page-body"><div class="mod-page-content">
+    <div class="content-block" id="m3-s0">
+      <h2 class="cb-h2"><span class="cb-num t2">01</span> UKG & ADP</h2>
+      <div class="info-grid">
+        <div class="info-card"><h4 class="t2">UKG (HRIS)</h4><p>Primary HR system since July 2025. Access via Okta. Use for time-off approvals, org chart, and employee data changes.</p></div>
+        <div class="info-card"><h4 class="t2">ADP (Payroll)</h4><p>View and verify payroll, job titles, compensation. Run reports for reviews and audits. Access via Okta.</p></div>
+      </div>
+    </div>
+    <div class="content-block" id="m3-s1">
+      <h2 class="cb-h2"><span class="cb-num t2">02</span> Freshservice & Navan</h2>
+      <div class="info-grid">
+        <div class="info-card"><h4 class="t2">Freshservice (IT)</h4><p>Approve access requests, complete onboarding tickets, submit issues, report security incidents.</p></div>
+        <div class="info-card"><h4 class="t2">Navan (Travel)</h4><p>Review and approve business travel. Verify dates, budgets, and policy alignment.</p></div>
+      </div>
+      <div class="callout t2"><strong>For IT questions:</strong> Slack <strong>#global-it-service-desk</strong></div>
+    </div>
+    <div class="content-block" id="m3-s2">
+      <h2 class="cb-h2"><span class="cb-num t2">03</span> ZipHQ & AI Tools</h2>
+      <p class="cb-p"><strong>ZipHQ</strong> handles all non-T&E purchases: software renewals, new partnerships, trials, additional licenses.</p>
+      <div class="callout t2"><strong>All non-T&E purchases must go through ZipHQ.</strong> No exceptions.</div>
+      <p class="cb-p"><strong>Ivy & Gemini:</strong> Use AI to augment, not replace, human judgment. <strong>Never input</strong> StackAdapt confidential info, client data, or personal data into AI prompts.</p>
+    </div>
+    <div class="content-block" id="m3-s3">
+      <h2 class="cb-h2"><span class="cb-num t2">04</span> Module Checklist</h2>
+      <div class="checklist-card t2-check" data-checklist="m3">
+        <h3>Tools & systems</h3>
+        <div class="check-item"><div class="chk"></div><span>I can log into UKG via Okta and approve time-off requests</span></div>
+        <div class="check-item"><div class="chk"></div><span>I know how to submit an IT access request in Freshservice</span></div>
+        <div class="check-item"><div class="chk"></div><span>I know all non-T&E purchases go through ZipHQ</span></div>
+        <div class="check-item"><div class="chk"></div><span>I've reviewed the Guidelines for AI Tool Usage at StackAdapt</span></div>
+        <div class="check-item"><div class="chk"></div><span>I know the Payroll Connect Page for country-specific guidance</span></div>
+      </div>
+    </div>
+    <div class="mod-nav-row"><button class="btn-back-mod" onclick="go('m2')">← DEIB</button><button class="btn-next-mod t2" onclick="go('m4')">Intro to Resources →</button></div>
+  </div><div></div></div>
+  <footer><div class="footer-logo"><span class="dot"></span>PMO StackAdapt</div><div>People Experience Team</div></footer>
+</div>
+
+<!-- MODULE 4: RESOURCES -->
+<div id="page-m4" style="display:none" class="mod-page">
+  <div class="mod-page-hero t2"><div class="mph-inner"><div>
+    <button class="mph-back" onclick="go('home')">← All modules</button>
+    <div class="mph-eyebrow t2">Module 04 · Track 2: Systems & Tools</div>
+    <h1 class="mph-h1">Intro to Resources</h1>
+    <p class="mph-lead">Key Guru pages, your PBP partnership, the 6 core policy areas every PM needs to know, and employee wellbeing resources.</p>
+  </div><div class="mph-sidebar">
+    <div class="mph-sidebar-label">In this module</div>
+    <nav class="mph-sidebar-nav"><a href="#m4-s0"><span class="snav-dot" style="background:var(--green)"></span>6 Core Resources</a><a href="#m4-s1"><span class="snav-dot" style="background:var(--green)"></span>Wellbeing</a><a href="#m4-s2"><span class="snav-dot" style="background:var(--green)"></span>Your PBP</a><a href="#m4-s3"><span class="snav-dot" style="background:var(--green)"></span>Checklist</a></nav>
+    <div class="progress-bar-wrap"><div class="pb-label">Progress <span id="progress-label-m4">0%</span></div><div class="pb-track"><div class="pb-fill" id="progress-m4" style="width:0%;background:var(--green)"></div></div></div>
+  </div></div></div>
+  <div class="mod-page-body"><div class="mod-page-content">
+    <div class="callout t2" style="margin-bottom:2rem;"><strong>Guru is the source of truth.</strong> When in doubt, search there first before assuming a policy doesn't exist.</div>
+    <div class="content-block" id="m4-s0">
+      <h2 class="cb-h2"><span class="cb-num t2">01</span> 6 Core People Resources</h2>
+      <div class="info-grid">
+        <div class="info-card"><h4 class="t2">Performance Management</h4><p>Semi-annual review cycles, timelines, calibration, and feedback responsibilities.</p></div>
+        <div class="info-card"><h4 class="t2">Job Architecture</h4><p>Role clarity, job levels, competencies. Use AppSheet Job Architecture Library.</p></div>
+        <div class="info-card"><h4 class="t2">Engagement Surveys</h4><p>Survey process, confidentiality, and action planning after results.</p></div>
+        <div class="info-card"><h4 class="t2">Hiring @ StackAdapt</h4><p>Headcount approval, interview responsibilities, and Greenhouse usage.</p></div>
+        <div class="info-card"><h4 class="t2">Internal Mobility</h4><p>How employees move between teams. Check eligibility; partner with PBP early.</p></div>
+        <div class="info-card"><h4 class="t2">Global Mobility</h4><p>Relocations, international moves, immigration compliance. Direct here before any commitments.</p></div>
+      </div>
+    </div>
+    <div class="content-block" id="m4-s1">
+      <h2 class="cb-h2"><span class="cb-num t2">02</span> Employee Wellbeing</h2>
+      <p class="cb-p">You're often the <strong>first point of contact</strong> for wellbeing concerns. Key resources: <strong>Modern Health</strong>, EAP, <strong>Disclo</strong>.</p>
+      <p class="cb-p"><strong>Signs to watch for:</strong> burnout, withdrawal, cynicism, changes in sleep/eating, fatigue, feelings of ineffectiveness.</p>
+      <div class="callout t2">Observe with empathy — notice behavioral changes but <strong>do not diagnose</strong>. Know when to escalate to your PBP.</div>
+    </div>
+    <div class="content-block" id="m4-s2">
+      <h2 class="cb-h2"><span class="cb-num t2">03</span> Your People Business Partner</h2>
+      <p class="cb-p">PBPs are <strong>strategic HR partners</strong> — not just reactive support. Partner with them on performance improvement plans, terminations, accommodation requests, complex ER issues, and org changes.</p>
+      <div class="callout t2"><strong>Tips:</strong> Proactively share team developments. Come prepared with the issue, data, and potential solutions. Find your PBP in the <strong>PBP Contact Guide</strong>.</div>
+    </div>
+    <div class="content-block" id="m4-s3">
+      <h2 class="cb-h2"><span class="cb-num t2">04</span> Module Checklist</h2>
+      <div class="checklist-card t2-check" data-checklist="m4">
+        <h3>Resources & partnerships</h3>
+        <div class="check-item"><div class="chk"></div><span>I've bookmarked the 6 core People resource pages in Guru</span></div>
+        <div class="check-item"><div class="chk"></div><span>I know who my PBP is and how to reach them</span></div>
+        <div class="check-item"><div class="chk"></div><span>I know the 3 main wellbeing tools (Modern Health, EAP, Disclo)</span></div>
+        <div class="check-item"><div class="chk"></div><span>I understand when and how to escalate wellbeing concerns</span></div>
+      </div>
+    </div>
+    <div class="mod-nav-row"><button class="btn-back-mod" onclick="go('m3')">← Tools</button><button class="btn-next-mod t2" onclick="go('m5')">Health & Safety →</button></div>
+  </div><div></div></div>
+  <footer><div class="footer-logo"><span class="dot"></span>PMO StackAdapt</div><div>People Experience Team</div></footer>
+</div>
+
+<!-- MODULE 5: H&S -->
+<div id="page-m5" style="display:none" class="mod-page">
+  <div class="mod-page-hero t2"><div class="mph-inner"><div>
+    <button class="mph-back" onclick="go('home')">← All modules</button>
+    <div class="mph-eyebrow t2">Module 05 · Track 2: Systems & Tools</div>
+    <h1 class="mph-h1">Health & Safety</h1>
+    <p class="mph-lead">Your legal and practical responsibilities for workplace health and safety in a remote-first environment.</p>
+  </div><div class="mph-sidebar">
+    <div class="mph-sidebar-label">In this module</div>
+    <nav class="mph-sidebar-nav"><a href="#m5-s0"><span class="snav-dot" style="background:var(--green)"></span>4 Responsibilities</a><a href="#m5-s1"><span class="snav-dot" style="background:var(--green)"></span>Remote Incidents</a><a href="#m5-s2"><span class="snav-dot" style="background:var(--green)"></span>Checklist</a></nav>
+    <div class="progress-bar-wrap"><div class="pb-label">Progress <span id="progress-label-m5">0%</span></div><div class="pb-track"><div class="pb-fill" id="progress-m5" style="width:0%;background:var(--green)"></div></div></div>
+  </div></div></div>
+  <div class="mod-page-body"><div class="mod-page-content">
+    <div class="content-block" id="m5-s0">
+      <h2 class="cb-h2"><span class="cb-num t2">01</span> Your 4 Manager Responsibilities</h2>
+      <div class="info-grid">
+        <div class="info-card"><h4 class="t2">Inform</h4><p>Keep StackAdapters informed of workplace hazards and respond to safety concerns.</p></div>
+        <div class="info-card"><h4 class="t2">Ensure Compliance</h4><p>Ensure your team completes mandatory annual H&S compliance training.</p></div>
+        <div class="info-card"><h4 class="t2">Protect</h4><p>Do everything reasonable to protect from harm or work-related illness.</p></div>
+        <div class="info-card"><h4 class="t2">Lead by Example</h4><p>Model healthy work-life balance, mental health awareness, and genuine self-care.</p></div>
+      </div>
+    </div>
+    <div class="content-block" id="m5-s1">
+      <h2 class="cb-h2"><span class="cb-num t2">02</span> When an Incident Is Reported</h2>
+      <p class="cb-p">Common remote incidents: mental health struggles/burnout, ergonomic/physical issues, reports of harassment or bullying.</p>
+      <ol class="cb-ol"><li>Use the <strong>workplace incident reporting template</strong> — document alongside the employee</li><li>Escalate to your <strong>PBP</strong> if necessary</li><li>Your PBP manages the investigation and advises on next steps</li></ol>
+      <div class="callout t2"><strong>Key resources:</strong> Global Mental Health Benefits · Ethics Hotline · StackAdapt Health and Safety Page — all in Guru.</div>
+    </div>
+    <div class="content-block" id="m5-s2">
+      <h2 class="cb-h2"><span class="cb-num t2">03</span> Module Checklist</h2>
+      <div class="checklist-card t2-check" data-checklist="m5">
+        <h3>Health & safety</h3>
+        <div class="check-item"><div class="chk"></div><span>I know where to find the workplace incident reporting template</span></div>
+        <div class="check-item"><div class="chk"></div><span>I know who my PBP is and when to escalate</span></div>
+        <div class="check-item"><div class="chk"></div><span>I've reviewed the StackAdapt Health and Safety Policy</span></div>
+        <div class="check-item"><div class="chk"></div><span>I know where to find Global Mental Health Benefits for my team</span></div>
+      </div>
+    </div>
+    <div class="mod-nav-row"><button class="btn-back-mod" onclick="go('m4')">← Resources</button><button class="btn-next-mod t3" onclick="go('m6')">Employee Lifecycle →</button></div>
+  </div><div></div></div>
+  <footer><div class="footer-logo"><span class="dot"></span>PMO StackAdapt</div><div>People Experience Team</div></footer>
+</div>
+
+<!-- MODULE 6: LIFECYCLE -->
+<div id="page-m6" style="display:none" class="mod-page">
+  <div class="mod-page-hero t3"><div class="mph-inner"><div>
+    <button class="mph-back" onclick="go('home')">← All modules</button>
+    <div class="mph-eyebrow t3">Module 06 · Track 3: Team Leadership</div>
+    <h1 class="mph-h1">Employee Experience & Lifecycle</h1>
+    <p class="mph-lead">From hiring through offboarding — every stage of the employee journey and your direct role in making each moment count.</p>
+  </div><div class="mph-sidebar">
+    <div class="mph-sidebar-label">In this module</div>
+    <nav class="mph-sidebar-nav"><a href="#m6-s0"><span class="snav-dot" style="background:#7C3AED"></span>Hiring</a><a href="#m6-s1"><span class="snav-dot" style="background:#7C3AED"></span>Onboarding</a><a href="#m6-s2"><span class="snav-dot" style="background:#7C3AED"></span>Flexible Work</a><a href="#m6-s3"><span class="snav-dot" style="background:#7C3AED"></span>Leave</a><a href="#m6-s4"><span class="snav-dot" style="background:#7C3AED"></span>Offboarding</a></nav>
+    <div class="progress-bar-wrap"><div class="pb-label">Progress <span id="progress-label-m6">0%</span></div><div class="pb-track"><div class="pb-fill" id="progress-m6" style="width:0%;background:#7C3AED"></div></div></div>
+  </div></div></div>
+  <div class="mod-page-body"><div class="mod-page-content">
+    <div class="content-block" id="m6-s0">
+      <h2 class="cb-h2"><span class="cb-num t3">01</span> Hiring at StackAdapt</h2>
+      <p class="cb-p">Use <strong>Greenhouse</strong> to review candidates and submit feedback. Leverage the <strong>Employee Referral Program</strong>. Prioritize clarity, fairness, and a positive candidate experience at every touchpoint.</p>
+    </div>
+    <div class="content-block" id="m6-s1">
+      <h2 class="cb-h2"><span class="cb-num t3">02</span> New Hire Onboarding</h2>
+      <div class="checklist-card t3-check" data-checklist="m6a">
+        <h3>Onboarding checklist</h3>
+        <div class="check-item"><div class="chk"></div><span>Add to all team meetings and Slack channels</span></div>
+        <div class="check-item"><div class="chk"></div><span>Submit Freshservice ticket for tool access</span></div>
+        <div class="check-item"><div class="chk"></div><span>Add to shared drives and folders</span></div>
+        <div class="check-item"><div class="chk"></div><span>Create 30/60/90 day plan</span></div>
+        <div class="check-item"><div class="chk"></div><span>Share Personal/Professional Blueprint</span></div>
+        <div class="check-item"><div class="chk"></div><span>Schedule regular 1:1 check-ins</span></div>
+        <div class="check-item"><div class="chk"></div><span>Encourage coffee chats across StackAdapt</span></div>
+      </div>
+      <div class="callout t3"><strong>Donut</strong> (Slack app) automatically reminds managers of onboarding responsibilities when a new hire joins.</div>
+    </div>
+    <div class="content-block" id="m6-s2">
+      <h2 class="cb-h2"><span class="cb-num t3">03</span> Flexible Models of Work</h2>
+      <div class="info-grid">
+        <div class="info-card"><h4 class="t3">Work & Wander</h4><p>6+ months tenure. Trips over 2 weeks need department lead approval first.</p></div>
+        <div class="info-card"><h4 class="t3">The Hub (Toronto)</h4><p>Remote-first = employees cannot be penalized for not attending.</p></div>
+        <div class="info-card"><h4 class="t3">WeWork</h4><p>Submit a Freshservice ticket for access. Meeting rooms should not be booked.</p></div>
+        <div class="info-card"><h4 class="t3">Relocations</h4><p>4 types. All need manager + PBP + Global Mobility approval. Always partner with PBP first.</p></div>
+      </div>
+    </div>
+    <div class="content-block" id="m6-s3">
+      <h2 class="cb-h2"><span class="cb-num t3">04</span> Taking Time Away</h2>
+      <p class="cb-p">Leave types: Vacation, Personal Care, Culture & Belief Day, Birthday, Sick, Parental, Bereavement, Jury duty, Unpaid.</p>
+      <ul class="cb-ul"><li>Show empathy — validate emotions, this may be a difficult time</li><li>Respect privacy — only ask what is necessary</li><li>Do not create guilt or imply the team will be burdened</li><li>For all non-vacation leave: <strong>confirm process with your PBP first</strong></li></ul>
+      <div class="callout t3"><strong>Birthday leave:</strong> Employees take their actual birthday off. Weekend birthday → preceding Friday or following Monday.</div>
+    </div>
+    <div class="content-block" id="m6-s4">
+      <h2 class="cb-h2"><span class="cb-num t3">05</span> Employee Offboarding</h2>
+      <p class="cb-p"><strong>Before terminating, you must be able to answer yes to all of these:</strong></p>
+      <div class="checklist-card t3-check" data-checklist="m6b">
+        <h3>Pre-termination checklist</h3>
+        <div class="check-item"><div class="chk"></div><span>Have you had a direct conversation about concerns?</span></div>
+        <div class="check-item"><div class="chk"></div><span>Have you given feedback and provided coaching?</span></div>
+        <div class="check-item"><div class="chk"></div><span>Have you maintained detailed documentation?</span></div>
+        <div class="check-item"><div class="chk"></div><span>Have you given verbal warnings?</span></div>
+        <div class="check-item"><div class="chk"></div><span>Have you implemented a Reignite Plan if applicable?</span></div>
+        <div class="check-item"><div class="chk"></div><span>Employee is NOT on job-protected leave or accommodation?</span></div>
+      </div>
+      <div class="callout warn"><strong>Sensitive situations:</strong> Job-protected leave (FMLA/parental/EI), active accommodation requests, employees who filed a complaint — anti-retaliation applies. Always partner with your PBP.</div>
+    </div>
+    <div class="mod-nav-row"><button class="btn-back-mod" onclick="go('m5')">← Health & Safety</button><button class="btn-next-mod t3" onclick="go('m7')">Retention & Growth →</button></div>
+  </div><div></div></div>
+  <footer><div class="footer-logo"><span class="dot"></span>PMO StackAdapt</div><div>People Experience Team</div></footer>
+</div>
+
+<!-- MODULE 7: RETENTION -->
+<div id="page-m7" style="display:none" class="mod-page">
+  <div class="mod-page-hero t3"><div class="mph-inner"><div>
+    <button class="mph-back" onclick="go('home')">← All modules</button>
+    <div class="mph-eyebrow t3">Module 07 · Track 3: Team Leadership</div>
+    <h1 class="mph-h1">Driving Retention & Growth</h1>
+    <p class="mph-lead">Strategies to retain top talent, build a culture of continuous development, and create career conversations that actually stick.</p>
+  </div><div class="mph-sidebar">
+    <div class="mph-sidebar-label">In this module</div>
+    <nav class="mph-sidebar-nav"><a href="#m7-s0"><span class="snav-dot" style="background:#7C3AED"></span>Why It Matters</a><a href="#m7-s1"><span class="snav-dot" style="background:#7C3AED"></span>IOs & IDPs</a><a href="#m7-s2"><span class="snav-dot" style="background:#7C3AED"></span>Career Conversations</a><a href="#m7-s3"><span class="snav-dot" style="background:#7C3AED"></span>L&D Resources</a><a href="#m7-s4"><span class="snav-dot" style="background:#7C3AED"></span>Checklist</a></nav>
+    <div class="progress-bar-wrap"><div class="pb-label">Progress <span id="progress-label-m7">0%</span></div><div class="pb-track"><div class="pb-fill" id="progress-m7" style="width:0%;background:#7C3AED"></div></div></div>
+  </div></div></div>
+  <div class="mod-page-body"><div class="mod-page-content">
+    <div class="content-block" id="m7-s0">
+      <h2 class="cb-h2"><span class="cb-num t3">01</span> Why This Matters</h2>
+      <div class="info-grid">
+        <div class="info-card"><h4 class="t3">1.5–2×</h4><p>Annual salary cost to replace one employee (Gallup)</p></div>
+        <div class="info-card"><h4 class="t3">34%</h4><p>Higher retention at companies with robust development programs (LinkedIn)</p></div>
+        <div class="info-card"><h4 class="t3">94%</h4><p>Of employees stay longer when their growth is invested in (Work Institute)</p></div>
+      </div>
+    </div>
+    <div class="content-block" id="m7-s1">
+      <h2 class="cb-h2"><span class="cb-num t3">02</span> Using IOs & IDPs</h2>
+      <p class="cb-p"><strong>Intended Outcomes (IOs)</strong> are specific, actionable outcomes written by ICs. Use them to facilitate alignment, identify growth opportunities, strengthen IDPs, and empower accountability.</p>
+      <p class="cb-p"><strong>Individual Development Plans (IDPs)</strong> help you maintain clear records of goals and progress, demonstrate team development, and prepare for succession planning.</p>
+    </div>
+    <div class="content-block" id="m7-s2">
+      <h2 class="cb-h2"><span class="cb-num t3">03</span> 5 Steps for Career Development Conversations</h2>
+      <ol class="cb-ol">
+        <li>Schedule <strong>quarterly</strong> — separate from performance reviews</li>
+        <li>Understand current skills, strengths, and what energizes the employee</li>
+        <li>Explore aspirations — give space to think big</li>
+        <li>Co-create a plan with actionable steps and clear timelines</li>
+        <li>Implement, review regularly, and adjust as needed</li>
+      </ol>
+      <div class="callout t3"><strong>Growth ≠ people leadership.</strong> StackAdapt values both the IC track and Leadership track equally. Clarify this with your team proactively.</div>
+    </div>
+    <div class="content-block" id="m7-s3">
+      <h2 class="cb-h2"><span class="cb-num t3">04</span> L&D Resources at StackAdapt</h2>
+      <div class="info-grid">
+        <div class="info-card"><h4 class="t3">StackU</h4><p>On-demand courses and certifications. Open to all StackAdapters.</p></div>
+        <div class="info-card"><h4 class="t3">StackUp</h4><p>Foundational Leadership Program for People Managers.</p></div>
+        <div class="info-card"><h4 class="t3">Leadership Coaching</h4><p>Coaching program for managers of individual contributors.</p></div>
+        <div class="info-card"><h4 class="t3">Book Bar</h4><p>Curated library of educational books and learning materials.</p></div>
+        <div class="info-card"><h4 class="t3">Dev Perk</h4><p>Funding for external training and education (currently under revision).</p></div>
+      </div>
+    </div>
+    <div class="content-block" id="m7-s4">
+      <h2 class="cb-h2"><span class="cb-num t3">05</span> Module Checklist</h2>
+      <div class="checklist-card t3-check" data-checklist="m7">
+        <h3>Retention & growth</h3>
+        <div class="check-item"><div class="chk"></div><span>I hold quarterly career development conversations with each direct report</span></div>
+        <div class="check-item"><div class="chk"></div><span>I use IOs as a foundation for development planning</span></div>
+        <div class="check-item"><div class="chk"></div><span>I have IDPs in place for my direct reports</span></div>
+        <div class="check-item"><div class="chk"></div><span>I've communicated that both IC and Leadership tracks are equally valued</span></div>
+        <div class="check-item"><div class="chk"></div><span>I know StackAdapt's L&D resources (StackU, StackUp, Book Bar)</span></div>
+      </div>
+    </div>
+    <div class="mod-nav-row"><button class="btn-back-mod" onclick="go('m6')">← Lifecycle</button><button class="btn-next-mod t1" onclick="go('home')">🎉 Back to Overview</button></div>
+  </div><div></div></div>
+  <footer><div class="footer-logo"><span class="dot"></span>PMO StackAdapt</div><div>People Experience Team</div></footer>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
