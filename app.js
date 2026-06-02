@@ -1,7 +1,7 @@
 /* ─── AUTH (Google Identity) ─────────────────────────── */
 // Replace YOUR_GOOGLE_CLIENT_ID with your actual OAuth client ID
 // from https://console.cloud.google.com/ → APIs & Services → Credentials
-const GOOGLE_CLIENT_ID = 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com';
+const GOOGLE_CLIENT_ID = '607752712596-1gotv3j97naf0dlkcpoap2m823sd0ipk.apps.googleusercontent.com';
 
 let currentUser = null;
 
