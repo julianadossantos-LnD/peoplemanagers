@@ -1,17 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>People Manager Onboarding · StackAdapt</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body id="app-root">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>People Manager Onboarding · StackAdapt</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+  /* ==========================================================================
+     1. BRAND COLORS (Screen Shot 2026-06-19 at 16.20.54 PM.png)
+     ========================================================================== */
+  :root {
+    --font-main: 'Source Sans 3', sans-serif;
+    --bg-app: #f3f3f4;      
+    --bg-card: #ffffff;
+    --text-main: #0c121a;   
+    --text-muted: #66696e;  
+    --text-light: #a6a8ab;  
+    
+    /* Branded Blues */
+    --blue: #0061ff;        
+    --blue-medium: #a0d3ff; 
+    --blue-light: #eaf5ff;  
+    
+    /* Functional Tracks */
+    --green: #00ba60;
+    --green-light: #ecfdf5;
+    --purple: #9e1a9d;
+    --purple-light: #f5f3ff;
+    
+    --border: #e2e8f0;
+    --radius: 16px;
+    --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
 
-  <!-- GLOBAL STICKY NAVIGATION HEADER -->
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--font-main);
+    background-color: var(--bg-app);
+    color: var(--text-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ==========================================================================
+     2. NAVIGATION ARCHITECTURE
+     ========================================================================== */
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0; height: 72px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem; z-index: 1000;
+  }
+
+  .nav-logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.1rem; color: var(--text-main); text-decoration: none; }
+  .dot { width: 8px; height: 8px; background: var(--blue); border-radius: 50%; box-shadow: 0 0 12px var(--blue); }
+  .nav-links { display: flex; gap: 0.5rem; background: rgba(12, 18, 26, 0.05); padding: 0.35rem; border-radius: 30px; }
+  
+  .nav-links a {
+    font-size: 0.9rem; color: var(--text-muted); cursor: pointer; text-decoration: none;
+    font-weight: 600; padding: 0.4rem 1rem; border-radius: 20px; transition: var(--transition);
+  }
+  .nav-links a:hover { color: var(--text-main); }
+  .nav-links a.active { background: var(--bg-card); color: var(--blue); box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+
+  .btn-signin, .btn-primary { font-family: var(--font-main); padding: 0.65rem 1.25rem; border-radius: var(--radius); font-weight: 600; cursor: pointer; transition: var(--transition); }
+  .btn-signin { background: var(--bg-card); border: 1px solid var(--border); color: var(--text-main); }
+  .btn-signin:hover { background: var(--blue-light); border-color: var(--blue-medium); transform: translateY(-1px); }
+  .btn-primary { background: var(--blue); color: white; border: none; box-shadow: 0 4px 12px rgba(0, 97, 255, 0.2); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0, 97, 255, 0.3); }
+
+  /* ==========================================================================
+     3. FIXED COLUMNS HERO DESIGN (Screen Shot 2026-06-19 at 16.58.42 PM.png)
+     ========================================================================== */
+  #page-home { padding-top: 72px; }
+  .hero { padding: 6rem 2rem; max-width: 1400px; margin: 0 auto; }
+  .hero-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
+
+  .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--blue-light); color: var(--blue); padding: 0.4rem 1rem; border-radius: 30px; font-size: 0.85rem; font-weight: 700; margin-bottom: 1.5rem; }
+  .badge-dot { width: 6px; height: 6px; background: var(--blue); border-radius: 50%; }
+
+  h1 { font-size: 4.25rem; line-height: 1.05; font-weight: 800; letter-spacing: -1.5px; margin-bottom: 1.5rem; color: var(--text-main); }
+  h1 em { font-style: italic; font-weight: 300; color: var(--blue); }
+  .hero-sub { color: var(--text-muted); font-size: 1.25rem; margin-bottom: 2.5rem; max-width: 550px; font-weight: 400; line-height: 1.5; }
+
+  .hero-onboarding-note { border-top: 1px solid #e2e8f0; padding-top: 2.5rem; margin-top: 4.5rem; max-width: 550px; }
+  .hero-onboarding-note p { font-size: 1.1rem; font-weight: 400; color: var(--text-muted); line-height: 1.6; }
+
+  /* Right-Side Dashboard Cards List */
+  .hero-right { display: flex; flex-direction: column; gap: 0.85rem; padding-top: 1.5rem; }
+  .hero-module-preview { display: flex; align-items: center; background: var(--bg-card); padding: 1.35rem 1.75rem; border-radius: 20px; border: 1px solid #e2e8f0; cursor: pointer; transition: var(--transition); box-shadow: 0 1px 3px rgba(12,18,26,0.02); }
+  .hero-module-preview:hover { transform: translateY(-2px); border-color: var(--blue-medium); box-shadow: 0 12px 30px rgba(0, 97, 255, 0.06); }
+
+  .hmp-num { font-weight: 400; color: var(--text-light); width: 40px; font-size: 1.1rem; }
+  .hmp-bar { width: 3px; height: 24px; border-radius: 2px; margin-right: 20px; flex-shrink: 0; }
+  .hmp-bar.t1 { background: var(--blue); }
+  .hmp-bar.t2 { background: var(--green); }
+  .hmp-bar.t3 { background: var(--purple); }
+
+  .hmp-title { font-weight: 700; font-size: 1.1rem; flex-grow: 1; color: var(--text-main); }
+  .hmp-arrow { color: var(--text-light); opacity: 0; transform: translateX(-5px); transition: var(--transition); font-weight: 700; }
+  .hero-module-preview:hover .hmp-arrow { opacity: 1; transform: translateX(0); color: var(--blue); }
+
+  /* ==========================================================================
+     4. LABS & CURRICULUM LAYOUTS
+     ========================================================================== */
+  .tracks-section { background: #ffffff; padding: 6rem 2rem; border-top: 1px solid var(--border); }
+  .tracks-header { margin-bottom: 4rem; }
+  .section-eyebrow { text-transform: uppercase; font-size: 0.8rem; font-weight: 700; letter-spacing: 1px; color: var(--text-light); margin-bottom: 0.5rem; }
+  .section-h2 { font-size: 2.5rem; font-weight: 800; letter-spacing: -1px; margin-bottom: 1rem; }
+  .section-lead { color: var(--text-muted); max-width: 650px; font-size: 1.1rem; }
+
+  .tracks-grid { display: flex; flex-direction: column; gap: 4rem; }
+  .track-label-row { display: flex; align-items: center; gap: 1.25rem; margin-bottom: 1.5rem; }
+  .tnum { font-size: 0.75rem; font-weight: 700; padding: 0.25rem 0.65rem; border-radius: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .tnum.t1 { background: var(--blue-light); color: var(--blue); }
+  .tnum.t2 { background: var(--green-light); color: var(--green); }
+  .tnum.t3 { background: var(--purple-light); color: var(--purple); }
+  .tname { font-weight: 700; font-size: 1.25rem; }
+  .trule { flex-grow: 1; height: 1px; background: var(--border); }
+
+  .modules-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1.5rem; }
+  .mod-card { background: var(--bg-app); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; display: flex; flex-direction: column; position: relative; cursor: pointer; transition: var(--transition); }
+  .mod-card:hover { transform: translateY(-6px); background: #ffffff; border-color: var(--blue-medium); box-shadow: 0 20px 30px rgba(12, 18, 26, 0.04); }
+  .mod-card-accent { position: absolute; top: 0; left: 0; right: 0; height: 4px; border-radius: var(--radius) var(--radius) 0 0; }
+  .mod-card-accent.t1 { background: var(--blue); }
+  .mod-card-accent.t2 { background: var(--green); }
+  .mod-card-accent.t3 { background: var(--purple); }
+  .mod-card-title { font-size: 1.35rem; font-weight: 700; margin-bottom: 0.75rem; }
+  .mod-card-desc { color: var(--text-muted); font-size: 0.95rem; }
+
+  /* ==========================================================================
+     5. SPLIT CONTAINER WORKSPACES (Side-by-Side Checklists & Links Grid)
+     ========================================================================== */
+  .module-interactive-split { display: flex; gap: 2rem; align-items: stretch; margin: 3rem 0; }
+  .module-interactive-split > .checklist-card,
+  .module-interactive-split > .guru-ref-card { flex: 1; margin: 0 !important; }
+
+  .guru-ref-card { background: #ffffff; border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; box-shadow: 0 4px 20px rgba(12, 18, 26, 0.01); display: flex; flex-direction: column; }
+  .guru-ref-card h3 { font-size: 1.25rem; font-weight: 800; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 10px; }
+  .guru-ref-card h3 svg { color: var(--blue); }
+
+  .guru-links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.85rem; flex-grow: 1; }
+  .guru-link-item { display: flex; align-items: center; gap: 10px; padding: 0.85rem 1.15rem; background: #f8fafc; border: 1px solid var(--border); border-radius: 12px; text-decoration: none; color: var(--text-main); font-weight: 600; font-size: 0.95rem; transition: var(--transition); }
+  .guru-link-item:hover { background: var(--blue-light); border-color: var(--blue-medium); color: var(--blue); transform: translateY(-1px); }
+
+  .checklist-card { background: #ffffff; border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; }
+  .checklist-card h3 { margin-bottom: 1.25rem; font-size: 1.25rem; font-weight: 800; }
+  .check-item { display: flex; align-items: flex-start; gap: 14px; padding: 1rem 0; border-bottom: 1px solid #f1f5f9; cursor: pointer; user-select: none; }
+  .check-item:last-child { border-bottom: none; }
+  .chk { width: 22px; height: 22px; border: 2px solid #cbd5e1; border-radius: 7px; flex-shrink: 0; margin-top: 1px; position: relative; transition: var(--transition); background: #ffffff; }
+
+  .check-item:hover .chk { border-color: var(--blue-medium); }
+  .check-item.checked .chk { background: var(--blue); border-color: var(--blue); }
+  .t2-check .check-item.checked .chk { background: var(--green); border-color: var(--green); }
+  .t3-check .check-item.checked .chk { background: var(--purple); border-color: var(--purple); }
+  .check-item.checked .chk::after { content: ''; position: absolute; left: 6px; top: 2px; width: 5px; height: 10px; border: solid white; border-width: 0 2.5px 2.5px 0; transform: rotate(45deg); }
+  .check-item.checked span { color: var(--text-muted); text-decoration: line-through; }
+  .check-item span { font-size: 1.05rem; font-weight: 500; color: #334155; }
+
+  /* Pill Buttons Mechanics */
+  .pill-btn-wrap { display: inline-block; padding: 2px; border-radius: 32px; background: linear-gradient(135deg, var(--blue), var(--blue-medium)); transition: var(--transition); }
+  .pill-btn-wrap:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0, 97, 255, 0.2); }
+  .pill-btn-inner { background: #ffffff; border: none; font-family: var(--font-main); font-weight: 700; font-size: 0.85rem; color: var(--text-main); cursor: pointer; padding: 0.55rem 1.35rem; border-radius: 30px; display: flex; align-items: center; gap: 6px; }
+
+  .mod-nav-row { display: flex; justify-content: space-between; border-top: 1px solid var(--border); padding-top: 2.5rem; margin-top: 4rem; align-items: center; }
+  footer { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; color: var(--text-muted); font-size: 0.9rem; font-weight: 500; }
+  .modal-bg { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(15, 23, 42, 0.3); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 2000; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+  .modal-bg.open { opacity: 1; pointer-events: auto; }
+  .modal { background: #ffffff; padding: 3rem; border-radius: 24px; max-width: 460px; width: 90%; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); text-align: center; }
+  .modal h2 { font-size: 1.75rem; font-weight: 800; margin-bottom: 0.75rem; }
+  .modal p { color: var(--text-muted); font-size: 1rem; margin-bottom: 2rem; }
+  .modal-close { background: transparent; border: none; font-family: var(--font-main); color: var(--text-muted); font-weight: 600; cursor: pointer; margin-top: 1.5rem; }
+
+  @media (max-width: 1024px) {
+    .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .module-interactive-split { flex-direction: column; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- TOP HEADER -->
   <nav class="nav">
     <a class="nav-logo" href="#" onclick="go('home')"><span class="dot"></span>PMO StackAdapt</a>
     <div class="nav-links">
@@ -29,7 +207,7 @@
     </div>
   </nav>
 
-  <!-- USER SIGN IN MODAL OVERLAY -->
+  <!-- AUTH DIALOG OVERLAY -->
   <div class="modal-bg" id="signin-modal" onclick="if(event.target===this)closeModal()">
     <div class="modal">
       <h2>Save your progress</h2>
@@ -39,24 +217,26 @@
   </div>
 
   <!-- ==========================================================================
-       HOME HUB VIEWBOARD
+       HOME HUB OVERVIEW SCREEN
        ========================================================================== -->
   <div id="page-home">
     <section class="hero">
       <div class="hero-inner">
         <div>
-          <div class="hero-badge fade-up"><span class="badge-dot"></span>People Manager Track · 7 Modules</div>
+          <div class="hero-badge"><span class="badge-dot"></span>People Manager Track · 7 Modules</div>
           <h1>Lead with<br><em>clarity</em> and<br>confidence.</h1>
           <p class="hero-sub">Everything you need to show up as the leader your team deserves — built for StackAdapt's culture, tools, and pace.</p>
           <div class="hero-actions">
             <button class="btn-primary" onclick="go('m1')">Begin Module 1 →</button>
           </div>
           
-          <!-- Welcome Intro Descriptive Note Element Section -->
+          <!-- Exact Custom Text string Implemented -->
           <div class="hero-onboarding-note">
             <p>This checklist is made for you efficiently discover, connect with, and utilize all supportive resources available to you as a <strong>People Manager here at StackAdapt</strong>.</p>
           </div>
         </div>
+        
+        <!-- Aligned Right-Side Live Cards Previews Stack -->
         <div class="hero-right">
           <div class="hero-module-preview" onclick="go('m1')"><span class="hmp-num">01</span><div class="hmp-bar t1"></div><span class="hmp-title">Leadership at StackAdapt</span><span class="hmp-arrow">→</span></div>
           <div class="hero-module-preview" onclick="go('m2')"><span class="hmp-num">02</span><div class="hmp-bar t1"></div><span class="hmp-title">DEIB Foundations</span><span class="hmp-arrow">→</span></div>
@@ -69,7 +249,7 @@
       </div>
     </section>
 
-    <!-- LIVE WORKSHOPS INTERACTIVE PANEL SECTION -->
+    <!-- LIVE WORKSHOPS SECTIONS LABS -->
     <div class="tracks-section" style="background: #fafafa; border-top: 1px solid var(--border);">
       <div class="section-wrap">
         <div class="tracks-header">
@@ -100,7 +280,7 @@
       </div>
     </div>
 
-    <!-- CORE CURRICULUM OVERVIEW PATHS -->
+    <!-- MAIN CURRICULUM OVERVIEW HUB -->
     <div class="tracks-section">
       <div class="section-wrap">
         <div class="tracks-header">
@@ -272,7 +452,7 @@
         <div class="checklist-card t2-check" data-checklist="m5">
           <h3>Health & safety</h3>
           <div class="check-item"><div class="chk"></div><span>I know where to find the workplace incident reporting template</span></div>
-          <div class="chk-item"><div class="chk"></div><span>I know who my PBP is and when to escalate</span></div>
+          <div class="check-item"><div class="chk"></div><span>I know who my PBP is and when to escalate</span></div>
           <div class="check-item"><div class="chk"></div><span>I've reviewed the StackAdapt Health and Safety Policy</span></div>
         </div>
         <div class="guru-ref-card">
@@ -356,6 +536,47 @@
     </div>
   </div>
 
-  <script src="app.js"></script>
+  <!-- Runtime Routing Logic Engine Component -->
+  <script>
+    function go(pageId) {
+      document.getElementById('page-home').style.display = 'none';
+      document.querySelectorAll('.mod-page').forEach(page => page.style.display = 'none');
+      
+      if (pageId === 'home') {
+        document.getElementById('page-home').style.display = 'block';
+      } else {
+        const targetPage = document.getElementById(`page-${pageId}`);
+        if (targetPage) targetPage.style.display = 'block';
+      }
+      
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      
+      document.querySelectorAll('.nav-links a').forEach(link => {
+        link.classList.remove('active');
+        if (link.id === `n-${pageId}`) link.classList.add('active');
+      });
+    }
+
+    function openModal() { document.getElementById('signin-modal').classList.add('open'); }
+    function closeModal() { document.getElementById('signin-modal').classList.remove('open'); }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const cards = document.querySelectorAll('.checklist-card');
+      cards.forEach(card => {
+        const trackId = card.getAttribute('data-checklist');
+        const items = card.querySelectorAll('.check-item');
+        items.forEach((item, index) => {
+          const memoryKey = `pmo_state_${trackId}_${index}`;
+          if (localStorage.getItem(memoryKey) === 'true') {
+            item.classList.add('checked');
+          }
+          item.addEventListener('click', () => {
+            item.classList.toggle('checked');
+            localStorage.setItem(memoryKey, item.classList.contains('checked'));
+          });
+        });
+      });
+    });
+  </script>
 </body>
 </html>
